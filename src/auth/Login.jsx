@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATH } from "../utils/apiPath";
 import toast from "react-hot-toast";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();

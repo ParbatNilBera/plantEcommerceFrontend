@@ -1,4 +1,4 @@
-import UserProvider from "./context/userContext";
+import UserProvider from "./context/UserContext";
 import MainRoute from "./routes/MainRoute";
 import { Toaster } from "react-hot-toast";
 

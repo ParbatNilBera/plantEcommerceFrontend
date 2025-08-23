@@ -10,7 +10,7 @@ import {
   FiEyeOff,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATH } from "../utils/apiPath";
 
