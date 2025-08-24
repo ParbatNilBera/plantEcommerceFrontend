@@ -6,6 +6,9 @@ import Plants from "../pages/Plants";
 import PlantDetails from "../pages/PlantDetails";
 import EditProfile from "../pages/EditProfile";
 import EditAddress from "../pages/EditAddress";
+import Dashboard from "../admin/dashboard/Dashboard";
+import AdminLogin from "../admin/auth/AdminLogin";
+import Cart from "../user/Cart";
 const MainRoute = () => {
   return (
     <div>
@@ -18,6 +21,9 @@ const MainRoute = () => {
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/editAddress" element={<EditAddress />} />
           <Route path="/plants/:plantId" element={<PlantDetails />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
     </div>

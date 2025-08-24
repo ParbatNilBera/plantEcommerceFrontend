@@ -7,8 +7,11 @@ import {
   FiMapPin,
   FiLogOut,
 } from "react-icons/fi";
+import { CiShoppingCart } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
+import axiosInstance from "../../../utils/axiosInstance";
+import { API_PATH } from "../../../utils/apiPath";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -16,9 +19,15 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const { user, clearUser } = useContext(UserContext);
+  const [cartCount, setCartCount] = useState();
 
   // Handle scroll effect
   useEffect(() => {
+    const fetchCart = async () => {
+      const res = await axiosInstance.get(API_PATH.CART.FETCH_CART);
+      setCartCount(res.data.data.length);
+    };
+    fetchCart();
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -78,6 +87,29 @@ const Navbar = () => {
                   >
                     <FiUser size={24} />
                   </div>
+                  {cartCount ? (
+                    <button
+                      className="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer text-yellow-500 hover:text-green-800"
+                      onClick={() => navigate("/cart")}
+                    >
+                      <CiShoppingCart size={24} />
+
+                      {/* Cart count badge */}
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                        {cartCount}
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer text-yellow-500 hover:text-green-800"
+                      onClick={() => {
+                        navigate("/cart");
+                      }}
+                    >
+                      {" "}
+                      <CiShoppingCart size={24} />{" "}
+                    </button>
+                  )}
                 </div>
               ) : (
                 <div className="flex items-center space-x-3">

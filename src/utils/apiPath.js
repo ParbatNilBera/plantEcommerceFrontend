@@ -6,11 +6,24 @@ export const API_PATH = {
     LOGIN: "/api/auth/login",
     REGISTER: "/api/auth/register",
     GET_PROFILE: "/api/auth/profile",
+    ADMIN_LOGIN: "/api/auth/login-admin",
   },
-  ADMIN: {},
-  USER: {},
+  CART: {
+    FETCH_CART: "/api/cart/",
+    ADD_TO_CART: "/api/cart/add",
+    REMOVE_ITEM_FROM_CART: (itemId) => `/api/cart/${itemId}`,
+    CLEAR_CART: "/api/cart/",
+  },
+  USER: {
+    UPDATE_PROFILE: "/api/user/edit-profile",
+    UPDATE_ADDRESS: "/api/user/edit-address",
+    GET_ADDRESS: "/api/user/addresses",
+  },
   PLANT: {
     GET_ALL_PLANTS: "/api/plant/plants",
     GET_PARTICULAR_PLANT: (plantId) => `/api/plant/plant/${plantId}`,
+    CREATE_PLANT: "/api/plant/plant",
+    UPDATE_PLANT: (plantId) => `/api/plant/plant/${plantId}`,
+    DELETE_PLANT: (plantId) => `/api/plant/plant/${plantId}`,
   },
 };

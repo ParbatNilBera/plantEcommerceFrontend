@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATH } from "../utils/apiPath";
-import { FiStar, FiHeart, FiShoppingCart } from "react-icons/fi";
+import { FiStar, FiShoppingCart } from "react-icons/fi";
+import { toast } from "react-hot-toast";
 
 const PlantDetailsPage = () => {
   const { plantId } = useParams();
   const [plant, setPlant] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const careIcons = {
@@ -27,9 +29,10 @@ const PlantDetailsPage = () => {
         );
         const plantData = res.data.data;
         setPlant(plantData);
-        setSelectedImage(plantData.imageUrl); // default main image
+        setSelectedImage(plantData.imageUrl);
       } catch (error) {
         console.error("Error fetching plant:", error);
+        toast.error("Failed to load plant details");
       }
     };
     fetchPlant();
@@ -44,7 +47,7 @@ const PlantDetailsPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Render star rating
+  // Render stars
   const renderStars = (rating, reviewsCount) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -73,6 +76,24 @@ const PlantDetailsPage = () => {
         </span>
       </div>
     );
+  };
+
+  // Add to Cart
+  const handleAddToCart = async () => {
+    if (!plant || quantity <= 0) return;
+    try {
+      setIsAdding(true);
+      const res = await axiosInstance.post(API_PATH.CART.ADD_TO_CART, {
+        productId: plant._id,
+        quantity,
+      });
+      toast.success("Added to cart!");
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add to cart");
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   if (!plant) return <div className="text-center py-20">Loading...</div>;
@@ -262,7 +283,8 @@ const PlantDetailsPage = () => {
                 </div>
 
                 <button
-                  disabled={!plant.isAvailable || plant.stock === 0}
+                  disabled={!plant.isAvailable || plant.stock === 0 || isAdding}
+                  onClick={handleAddToCart}
                   className={`w-full py-4 px-6 rounded-xl font-semibold text-white text-lg transition-all duration-200 flex items-center justify-center space-x-2 ${
                     plant.isAvailable && plant.stock > 0
                       ? "hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]"
@@ -277,7 +299,9 @@ const PlantDetailsPage = () => {
                 >
                   <FiShoppingCart className="w-5 h-5" />
                   <span>
-                    {plant.isAvailable && plant.stock > 0
+                    {isAdding
+                      ? "Adding..."
+                      : plant.isAvailable && plant.stock > 0
                       ? "Add to Cart"
                       : "Out of Stock"}
                   </span>

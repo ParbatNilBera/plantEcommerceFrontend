@@ -8,7 +8,7 @@ const HeroSection = () => {
   const backgroundImages = [
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2560&q=80", // Forest/nature
     "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2560&q=80", // Indoor plants
-    "https://images.unsplash.com/photo-1574263867128-a3b1b15c3b7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2560&q=80", // Outdoor garden
+    "https://images.unsplash.com/photo-1594498653385-d5172c532c00?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Outdoor garden
   ];
 
   // Auto-advance slideshow every 5 seconds
