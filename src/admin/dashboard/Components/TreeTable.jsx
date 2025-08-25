@@ -26,11 +26,10 @@ const TreeTable = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [viewMode, setViewMode] = useState("table"); // 'table' or 'grid'
-
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
 
-  // ✅ Fetch plants
+  // Fetch plants
   const fetchPlants = async () => {
     try {
       const res = await axiosInstance.get(API_PATH.PLANT.GET_ALL_PLANTS);
@@ -47,24 +46,20 @@ const TreeTable = () => {
     fetchPlants();
   }, []);
 
-  // ✅ Apply filters when search/category changes
+  // Filter plants
   useEffect(() => {
     let data = [...plants];
-
     if (category !== "All") {
       data = data.filter((p) => p.categories?.includes(category));
     }
-
     if (search.trim()) {
       data = data.filter((p) =>
         p.name.toLowerCase().includes(search.toLowerCase())
       );
     }
-
     setFilteredPlants(data);
   }, [search, category, plants]);
 
-  // ✅ Handle edit button click
   const handleEditTree = (tree) => {
     setSelectedPlant(tree);
     setIsEditOpen(true);
@@ -86,7 +81,7 @@ const TreeTable = () => {
     <div>
       <div className="bg-white rounded-lg shadow-sm mb-6">
         {/* Add Tree Button */}
-        <div className="px-6 py-4 border-b border-gray-200 flex justify-end">
+        <div className="px-4 sm:px-6 py-4 border-b border-gray-200 flex justify-end">
           <AddTree
             setPlants={setPlants}
             plants={plants}
@@ -95,14 +90,14 @@ const TreeTable = () => {
         </div>
 
         {/* Filters + View Toggle */}
-        <div className="px-6 py-4 border-t border-gray-200 flex flex-col md:flex-row justify-between gap-4">
+        <div className="px-4 sm:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between gap-4">
           {/* Filters */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto">
             {/* Category Filter */}
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="px-3 py-2 border rounded-lg text-gray-700"
+              className="px-3 py-2 border rounded-lg text-gray-700 w-full sm:w-auto"
             >
               {CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>
@@ -117,12 +112,12 @@ const TreeTable = () => {
               placeholder="Search plants..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="px-3 py-2 border rounded-lg w-64"
+              className="px-3 py-2 border rounded-lg w-full sm:w-64"
             />
           </div>
 
           {/* View Toggle */}
-          <div className="flex bg-gray-100 rounded-lg p-1 self-start md:self-auto">
+          <div className="flex bg-gray-100 rounded-lg p-1 self-start sm:self-auto">
             <button
               onClick={() => setViewMode("table")}
               className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${

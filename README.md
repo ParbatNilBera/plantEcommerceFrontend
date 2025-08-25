@@ -1,4 +1,4 @@
-# Urvann Mini Plant Store
+#  Mini Plant Store
 
 **Author:** Parbat Nil Bera  
 **Role:** Software Development Intern  
