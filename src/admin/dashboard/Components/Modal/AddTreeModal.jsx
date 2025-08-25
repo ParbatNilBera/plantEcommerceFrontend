@@ -9,6 +9,7 @@ import { CiShoppingTag, CiHashtag } from "react-icons/ci";
 import { FiFileText } from "react-icons/fi";
 import axiosInstance from "../../../../utils/axiosInstance";
 import { API_PATH } from "../../../../utils/apiPath";
+import toast from "react-hot-toast";
 
 const CATEGORIES = [
   "Indoor",
@@ -74,14 +75,20 @@ const AddTreeModal = ({ refreshPlants }) => {
       formData.append("price", data.price);
       formData.append("stock", data.stock);
 
-      // ✅ send array properly
+      // Categories array as JSON string
       formData.append("categories", JSON.stringify(data.categories));
 
-      formData.append("careTips", JSON.stringify(data.careTips));
+      // Flatten careTips
+      formData.append("careTips[sunlight]", data.careTips.sunlight);
+      formData.append("careTips[water]", data.careTips.water);
+      formData.append("careTips[soil]", data.careTips.soil);
+      formData.append("careTips[temperature]", data.careTips.temperature);
 
-      if (data.image) {
-        formData.append("media", data.image);
+      if (!data.image) {
+        toast.error("Add image to proceed");
+        return;
       }
+      formData.append("media", data.image);
 
       const res = await axiosInstance.post(
         API_PATH.PLANT.CREATE_PLANT,
@@ -94,6 +101,7 @@ const AddTreeModal = ({ refreshPlants }) => {
       if (res.data.status === "success") {
         refreshPlants?.(res.data.data);
       }
+
       reset();
       setImagePreview(null);
       setIsOpen(false);
@@ -101,6 +109,47 @@ const AddTreeModal = ({ refreshPlants }) => {
       console.error("Error adding tree:", error);
     }
   };
+
+  // const onSubmit = async (data) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("name", data.name);
+  //     formData.append("description", data.description);
+  //     formData.append("price", data.price);
+  //     formData.append("stock", data.stock);
+
+  //     // ✅ send array properly
+  //     formData.append("categories", JSON.stringify(data.categories));
+
+  //     formData.append("careTips", JSON.stringify(data.careTips));
+
+  //     if (!data.image) {
+  //       toast.error("Add image to Process");
+  //       return;
+  //     }
+
+  //     if (data.image) {
+  //       formData.append("media", data.image);
+  //     }
+
+  //     const res = await axiosInstance.post(
+  //       API_PATH.PLANT.CREATE_PLANT,
+  //       formData,
+  //       {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       }
+  //     );
+
+  //     if (res.data.status === "success") {
+  //       refreshPlants?.(res.data.data);
+  //     }
+  //     reset();
+  //     setImagePreview(null);
+  //     setIsOpen(false);
+  //   } catch (error) {
+  //     console.error("Error adding tree:", error);
+  //   }
+  // };
 
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.9 },

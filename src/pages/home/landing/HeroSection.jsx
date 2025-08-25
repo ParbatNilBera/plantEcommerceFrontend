@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight, Leaf } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Plant-themed background images (using high-quality nature images from Unsplash)
@@ -75,17 +77,12 @@ const HeroSection = () => {
           <button
             className="w-full sm:w-auto group bg-[#2E7D32] hover:bg-[#1B5E20] text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300/50 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 min-w-[200px]"
             aria-label="Shop for plants now"
+            onClick={() => {
+              navigate("/plants");
+            }}
           >
             <span>Shop Now</span>
             <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-
-          {/* Learn More Button */}
-          <button
-            className="w-full sm:w-auto group bg-[#8D6E63] hover:bg-[#6D4C41] text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-300/50 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 min-w-[200px]"
-            aria-label="Learn more about plant care"
-          >
-            <span>Learn More</span>
           </button>
         </div>
 

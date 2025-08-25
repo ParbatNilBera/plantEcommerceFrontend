@@ -38,6 +38,7 @@ const ProductCatalog = () => {
     const fetchPlants = async () => {
       try {
         const res = await axiosInstance.get(API_PATH.PLANT.GET_ALL_PLANTS);
+        console.log(res.data.data.items);
         setSampleProducts(res.data.data.items || []);
       } catch (error) {
         console.error("Error fetching plants:", error);
@@ -125,7 +126,7 @@ const ProductCatalog = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Plant Paradise
+          PlantCo
         </motion.h1>
 
         {/* Filters */}
@@ -207,7 +208,7 @@ const ProductCatalog = () => {
               disabled={currentPage === 1}
               className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <FiChevronLeft className="w-4 h-4" />
               Previous
             </button>
 
@@ -235,7 +236,7 @@ const ProductCatalog = () => {
               className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
-              <ChevronRight className="w-4 h-4" />
+              <FiChevronRight className="w-4 h-4" />
             </button>
           </motion.div>
         )}

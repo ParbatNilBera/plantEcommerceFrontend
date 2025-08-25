@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATH } from "../utils/apiPath";
 import { FiStar, FiShoppingCart } from "react-icons/fi";
 import { toast } from "react-hot-toast";
+import { UserContext } from "../context/UserContext";
 
 const PlantDetailsPage = () => {
+  const navigate = useNavigate();
   const { plantId } = useParams();
   const [plant, setPlant] = useState(null);
+  const { user } = useContext(UserContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
@@ -28,6 +31,7 @@ const PlantDetailsPage = () => {
           API_PATH.PLANT.GET_PARTICULAR_PLANT(plantId)
         );
         const plantData = res.data.data;
+        console.log(res.data.data);
         setPlant(plantData);
         setSelectedImage(plantData.imageUrl);
       } catch (error) {
@@ -80,6 +84,11 @@ const PlantDetailsPage = () => {
 
   // Add to Cart
   const handleAddToCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || !user) {
+      navigate("/login");
+      toast.error("login to add in cart ");
+    }
     if (!plant || quantity <= 0) return;
     try {
       setIsAdding(true);
@@ -194,12 +203,6 @@ const PlantDetailsPage = () => {
                   </span>
                 ))}
               </div>
-
-              {/* Rating */}
-              {renderStars(
-                plant.rating?.average || 0,
-                plant.rating?.reviewsCount || 0
-              )}
 
               {/* Description */}
               <p className="text-gray-700 text-lg leading-relaxed">

@@ -1,12 +1,57 @@
-# React + Vite
+# Urvann Mini Plant Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Author:** Parbat Nil Bera  
+**Role:** Software Development Intern  
 
-Currently, two official plugins are available:
+**Deadline Submission:** 25th August 2025  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Project Link (Deployed):** [plant-ecommerce-frontend.vercel.app](https://plant-ecommerce-frontend.vercel.app/)  
+**GitHub Repo:** [https://github.com/ParbatNilBera/plantEcommerceFrontend](https://github.com/ParbatNilBera/plantEcommerceFrontend)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📝 Project Overview
+
+A **mini plant store** web application where customers can browse plants, search/filter by name or category, and admins can add new plants.  
+Built using **ReactJS (Frontend)**, **Node.js + Express (Backend)**, and **MongoDB**.
+
+---
+
+## 🚀 Features
+
+### 1. Plant Catalog
+- Grid/List view of all plants  
+- Fields: Name, Price, Categories (multiple), Stock availability  
+- Responsive design for mobile & desktop  
+
+### 2. Search & Filter
+- Search by plant name (case-insensitive)  
+- Search by category keyword (e.g., "Home Decor")  
+- Filter plants by category dropdown  
+
+### 3. Admin Features
+- Add new plants via a form  
+- Fields: Name, Price, Multiple Categories, Stock, Image, Care Tips  
+- Form validations included  
+
+### 4. Extra Features
+- Loading state & error handling when fetching data  
+- Care Tips displayed for each plant  
+- Mock database with 50+ plants  
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** ReactJS, TailwindCSS, React-Hook-Form, Framer Motion  
+- **Backend:** Node.js, Express, MongoDB, Mongoose  
+- **Deployment:** Vercel / Any platform of your choice  
+
+---
+
+## 🔑 Admin Credentials
+
+- **Email:** admin  
+- **Password:** admin  
+
+> Use these credentials to log in and access the **Add Plant** feature.

@@ -20,6 +20,7 @@ export const API_PATH = {
     GET_ADDRESS: "/api/user/addresses",
   },
   PLANT: {
+    GET_TOP_PLANTS: "/api/plant/top-plants",
     GET_ALL_PLANTS: "/api/plant/plants",
     GET_PARTICULAR_PLANT: (plantId) => `/api/plant/plant/${plantId}`,
     CREATE_PLANT: "/api/plant/plant",

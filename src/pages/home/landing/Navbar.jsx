@@ -24,6 +24,10 @@ const Navbar = () => {
   // Handle scroll effect
   useEffect(() => {
     const fetchCart = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return;
+      }
       const res = await axiosInstance.get(API_PATH.CART.FETCH_CART);
       setCartCount(res.data.data.length);
     };
