@@ -118,10 +118,10 @@ const ProductCatalog = () => {
     text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen w-full bg-gray-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         <motion.h1
-          className="text-4xl font-bold text-gray-800 mb-8 text-center"
+          className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 sm:mb-8 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -130,9 +130,9 @@ const ProductCatalog = () => {
         </motion.h1>
 
         {/* Filters */}
-        <motion.div className="mb-8 space-y-6">
+        <motion.div className="mb-6 sm:mb-8 space-y-4 sm:space-y-6">
           {/* Search */}
-          <div className="relative max-w-md mx-auto">
+          <div className="relative max-w-md mx-auto w-full">
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
@@ -179,7 +179,7 @@ const ProductCatalog = () => {
 
         {/* Products Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8"
           layout
         >
           <AnimatePresence mode="popLayout">
@@ -195,30 +195,30 @@ const ProductCatalog = () => {
 
         {/* No Results */}
         {filteredProducts.length === 0 && (
-          <motion.div className="text-center py-12">
+          <motion.div className="text-center py-8 sm:py-12">
             <p className="text-gray-500 text-lg">No products found.</p>
           </motion.div>
         )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <motion.div className="flex justify-center items-center gap-4">
+          <motion.div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
             <button
               onClick={() => setCurrentPage((p) => p - 1)}
               disabled={currentPage === 1}
-              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <FiChevronLeft className="w-4 h-4" />
               Previous
             </button>
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                 (page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`w-10 h-10 rounded-lg font-medium ${
+                    className={`w-9 sm:w-10 h-9 sm:h-10 rounded-lg font-medium ${
                       currentPage === page
                         ? "bg-green-500 text-white"
                         : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
@@ -233,7 +233,7 @@ const ProductCatalog = () => {
             <button
               onClick={() => setCurrentPage((p) => p + 1)}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
               <FiChevronRight className="w-4 h-4" />
