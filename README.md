@@ -50,7 +50,7 @@ Built using **ReactJS (Frontend)**, **Node.js + Express (Backend)**, and **Mongo
 ---
 
 ## 🔑 Admin Credentials
-
+-**Route** https://plant-ecommerce-frontend.vercel.app/admin
 - **Email:** admin  
 - **Password:** admin  
 
